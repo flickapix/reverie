@@ -208,7 +208,73 @@ function img_unautop($pee) {
 }
 add_filter( 'the_content', 'img_unautop', 30 );
 
-// Pagination
+// Pagination pages & posts
+
+//Pages
+
+/**
+ * Modification of wp_link_pages() for custom styling for foundation 3 by Zurb.
+ *
+ * @ author: Flickapix Dezign
+ * @ param  array $args
+ * @ return void
+*/
+function reverie_page_links( $args = array () )
+{
+    $defaults = array(
+        'before'         => '<ul class="pagination">',
+        'after'          => '</ul>',
+        'link_before'    => '',
+        'next_or_number' => 'number',
+        'link_after'     => '',
+        'pagelink'       => '%',
+        'echo'           => 1,
+        'pages'          => '<p class="pages">' . __('Pages','reverie').':</p>',
+        // element for the current page
+        'current_first'  => '<li class="current"><a href="">',
+        'current_last'   => '</a></li>',
+    );
+
+    $r = wp_parse_args( $args, $defaults );
+    $r = apply_filters( 'wp_link_pages_args', $r );
+    extract( $r, EXTR_SKIP );
+
+    global $page, $numpages, $multipage, $more, $pagenow;
+
+    
+
+    if ( ! $multipage )
+    {
+        return;
+    }
+
+    $output = $before;
+    
+    print $output . $pages;
+    
+    for ( $i = 1; $i < ( $numpages + 1 ); $i++ )
+    {
+        $j       = str_replace( '%', $i, $pagelink );
+        $output .= ' ';
+
+        if ( $i != $page || ( ! $more && 1 == $page ) )
+        {
+            $output .= "<li>";
+            $output .= _wp_link_page( $i ) . "{$link_before}{$j}{$link_after}</a>";
+            $output .= "</li>";
+        }
+        else
+        {   
+            // highlight the current page
+            $output .= "{$current_first}{$link_before}{$j}{$link_after}{$current_last}";
+        }
+    }
+
+    print $output . $after;
+}
+add_action( 'reverie_page_links', 'reverie_page_links', 10, 1 );
+
+// Posts
 function reverie_pagination() {
 	global $wp_query;
  

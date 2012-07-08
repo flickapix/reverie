@@ -99,6 +99,10 @@ License URI:        http://www.opensource.org/licenses/mit-license.php
     ul.page-numbers li.unavailable:hover a,ul.page-numbers li.unavailable a:focus { background: transparent; }
     ul.page-numbers li span.current { background: #2ba6cb; color: #fff; font-weight: bold; cursor: default; display: block; padding: 1px 7px 1px; }    
     
+    /* Custom wp_link_pages */
+    .reveriePagination { position: relative; height: 24px; }
+    .reveriePagination ul.pagination .pages { float: left; display: block; height: 24px; font-size: 15px; margin:4px 10px 0 5px;}
+    
 /*  ---------------------------
     :: Customize for BuddyPress
     --------------------------- */

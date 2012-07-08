@@ -9,8 +9,15 @@
 			<?php the_content(); ?>
 		</div>
 		<footer>
-			<?php wp_link_pages(array('before' => '<nav id="page-nav"><p>' . __('Pages:', 'reverie'), 'after' => '</p></nav>' )); ?>
+		
+			<div class="reveriePagination">
+        
+               <?php reverie_page_links();?>
+          
+            </div><!-- / reverie-pagination -->
+            
 			<p><?php the_tags(); ?></p>
+			
 		</footer>
 		<?php comments_template(); ?>
 	</article>
